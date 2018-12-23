@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Variables's initialization 
     var questionsArray = [];
     var myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    var question = "";
+    var question0 = "";
     var question1 = "";
     var question2 = "";
     var question3 = "";
@@ -26,7 +26,7 @@ $(document).ready(function() {
     //     //Restartting variables
     //     questionsArray = [];
     //     myArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    //     question = "";
+    //     question0 = "";
     //     question1 = "";
     //     question2 = "";
     //     question3 = "";
@@ -61,19 +61,26 @@ $(document).ready(function() {
         }
     }
 
-    function questionObject(idQuestion, question, answer1, answer2, answer3, correctAnswer) {
+    function questionObject(idQuestion, question, answer0, answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8, answer9, correctAnswer) {
         //questionObject constructor
         this.idQuestion = idQuestion;
         this.question = question;
+        this.answer0 = answer0;
         this.answer1 = answer1;
         this.answer2 = answer2;
         this.answer3 = answer3;
+        this.answer4 = answer4;
+        this.answer5 = answer5;
+        this.answer6 = answer6;
+        this.answer7 = answer7;
+        this.answer8 = answer8;
+        this.answer9 = answer9;
         this.correctAnswer = correctAnswer;
     }
 
     function createQuestionObject(){
         //Create new questionObject and push it into an array
-        question = new questionObject(0, "Who was the original drummer for the Beatles?", "Pete Best", "Ringo Start", "Stuart Sutcliffe", "Pete Best");
+        question0 = new questionObject(0, "Who was the original drummer for the Beatles?", "Pete Best", "Ringo Start", "Stuart Sutcliffe", "Pete Best");
         question1 = new questionObject(1, "Which of the Beatles did some fans believe had died and been replaced by a double?", "John", "Ringo", "Paul", "Paul");
         question2 = new questionObject(2, "Which album required over 700 hours of recordings?", "Abbey Road", "Let it be", "Sgt. Peppers Lonely Hearts Club Band", "Sgt. Peppers Lonely Hearts Club Band");
         question3 = new questionObject(3, "In what Beatles song did George Harrison first play the sitar?", "Norwegian wood", "Whithin you without you", "Accross the universe", "Norwegian wood");
@@ -83,34 +90,34 @@ $(document).ready(function() {
         question7 = new questionObject(7, "What was the working title of Yesterday?", "The day before", "I beleive", "Scrambled eggs", "Scrambled eggs");
         question8 = new questionObject(8, "What was the Beatles' first single?", "Please, please me", "Love me do", "Twist and shout", "Love me do");
         question9 = new questionObject(9, "What was the name of the Beatles's producer?", "Billy Preston", "George Martin", "Brian Epstein", "George Martin");
-        questionsArray.push(question, question1, question2, question3, question4, question5, question6, question7, question8, question9);
+        questionsArray.push(question0, question1, question2, question3, question4, question5, question6, question7, question8, question9);
     }
     
     function questionsDisplay(){ 
         //Display 10 randomly questions and their answers       
         // $("#answers, #gameStartOver, #gameDone").empty();
-        for (l = 0; l < 5; l++) {
+        for (l = 0; l < 6; l++) {
             $("#answers").append("<div id='" + questionsArray[myArray[l]].idQuestion + "'></div>")
-            $("#" + questionsArray[myArray[l]].idQuestion).append("<h3>" + questionsArray[myArray[l]].question + "</h3>");
+            $("#" + questionsArray[myArray[l]].idQuestion).append("<h1>" + questionsArray[myArray[l]].question + "</h1>");
+            $("#" + questionsArray[myArray[l]].idQuestion).append("<input type='radio' id='" + questionsArray[myArray[l]].answer0 + "' name='" + questionsArray[myArray[l]].idQuestion + "' value='" + questionsArray[myArray[l]].answer0+ "'>" + "<label>" + questionsArray[myArray[l]].answer0 + "</label>");
             $("#" + questionsArray[myArray[l]].idQuestion).append("<input type='radio' id='" + questionsArray[myArray[l]].answer1 + "' name='" + questionsArray[myArray[l]].idQuestion + "' value='" + questionsArray[myArray[l]].answer1+ "'>" + "<label>" + questionsArray[myArray[l]].answer1 + "</label>");
-            $("#" + questionsArray[myArray[l]].idQuestion).append("<input type='radio' id='" + questionsArray[myArray[l]].answer2 + "' name='" + questionsArray[myArray[l]].idQuestion + "' value='" + questionsArray[myArray[l]].answer2+ "'>" + "<label>" + questionsArray[myArray[l]].answer2 + "</label>");
-            $("#" + questionsArray[myArray[l]].idQuestion).append("<input type='radio' id='" + questionsArray[myArray[l]].answer3+ "' name='" + questionsArray[myArray[l]].idQuestion + "' value='" + questionsArray[myArray[l]].answer3+ "'>" + "<label>" + questionsArray[myArray[l]].answer3 + "</label>");
+            $("#" + questionsArray[myArray[l]].idQuestion).append("<input type='radio' id='" + questionsArray[myArray[l]].answer2+ "' name='" + questionsArray[myArray[l]].idQuestion + "' value='" + questionsArray[myArray[l]].answer2+ "'>" + "<label>" + questionsArray[myArray[l]].answer2 + "</label>");
             $("#" + questionsArray[myArray[l]].idQuestion).append("<img src ='' class='" + questionsArray[myArray[l]].idQuestion + "'/>");
             $("img").hide();
         }
         $("#gameDone").append("<button id='done' type='button'>Done</button>");
         $("#gameStartOver").append("<button id='startOver' type='button'>Start Over</button>");
+
     }   
 
     function endGame(countStart){
         if(countStart <= 0){
             clearInterval(downloadTimer);
             $("#timers").text("All done!");
-            $("#answers").empty();
+            $("#answers, #gameDone").empty();
             $("#answers").append("<label>Correct answers:&nbsp;</label><label>" + rightAnswer.length + "</label><img src ='assets/images/right.png' /><br>")
             $("#answers").append("<label>Incorrect answers:&nbsp;</label><label>" + wrongAnswer.length + "</label><img src ='assets/images/wrong.png' /><br>")
-            $("#answers").append("<label>Unanswered:&nbsp;</label><label>" + unAnswered + "</label><br>")
-            $("#gameDone").css({"disabled": "true"});
+            $("#answers").append("<label>Unanswered:&nbsp;</label><label>" + unAnswered + "</label><img src ='assets/images/unanswered.png' /><br>")
         }    
     }
 
